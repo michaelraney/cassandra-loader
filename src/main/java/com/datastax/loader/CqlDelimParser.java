@@ -331,6 +331,15 @@ public class CqlDelimParser {
         select += " FROM " + keyspace + "." + tablename;
         return select;
     }
+    public String generateIdSelect() {
+        String select = "SELECT " + sbl.get(0).name;
+        for (int i = 1; i < sbl.size(); i++) {
+            select = select + ", " + sbl.get(i).name;
+        }
+        select += " FROM " + keyspace + "." + tablename;
+        select += " WHERE " + sbl.get(0).name + "=?";
+        return select;
+    }
 
     public String getKeyspace() {
         return keyspace;
